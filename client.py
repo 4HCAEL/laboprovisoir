@@ -5,9 +5,15 @@ port = 8000
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket.connect((hote, port))
-print "Connection on {}".format(port)
 
-socket.send("Hey my name is Olivier!")
+while True:
+        print ("{} connected".format( address ))
 
-print "Close"
+        response = client.recv(255)
+        inp=input("msg: ")
+        client.send(inp.encode())
+        
+        if response != "":
+                print (response)
+print ("Close")
 socket.close()
