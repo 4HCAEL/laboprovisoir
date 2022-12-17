@@ -1,15 +1,17 @@
 import socket
 
-host = 'localhost'
-port = 8000
+socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket.bind(('', 8005))
+socket.listen(5)
+client, address = socket.accept()
+print ("{} connected".format( address ))
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind((host, port))
-    s.listen(1)
-    while True:
-        conn, address = s.accept()
-        with conn:
-            buff = conn.recv(512)
-            message = buff.decode('utf-8')
-            conn.sendall(f"echo : {message}".encode('utf-8'))
+while True:
+        inp=input("msg: ")
+        client.send(inp.encode())
+        response = client.recv(255)
+        print(response.decode())
+
+print ("Close")
+client.close()
+stock.close()
