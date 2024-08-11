@@ -12,6 +12,6 @@ while True:
         response = client.recv(255)
         print(response.decode())
 
-print ("Close")
+print("Close")
 client.close()
 stock.close()
